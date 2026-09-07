@@ -23,6 +23,7 @@
         .result-item strong { color: #5f6368; display: inline-block; width: 110px; }
         .delima-id { color: #1a73e8; font-weight: bold; word-break: break-all; }
         .error-msg { background: #fce8e6; color: #c5221f; padding: 12px; border-radius: 6px; margin-top: 15px; display: none; font-size: 14px; }
+        .footer-note { margin-top: 15px; font-size: 12px; color: #70757a; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #1a73e8; }
     </style>
 </head>
 <body>
@@ -49,6 +50,11 @@
             <div class="result-item"><strong>ID DELIMa:</strong> <span id="resID" class="delima-id"></span></div>
         </div>
     </div>
+
+    <div class="footer-note">
+        <strong>Panduan Kata Laluan Laluan (Default):</strong><br>
+        Kata laluan laluan murid secara standard ialah kombinasi Kod Sekolah dan 4 digit akhir Kad Pengenalan/MyKid.
+    </div>
 </div>
 
 <script>
@@ -67,7 +73,7 @@ async function prosesCarian() {
     }
 
     try {
-        const response = await fetch('DELIMA-PELAJAR-SEKOLAH_KEBANGSAAN_KAMPUNG_NANGKA-07092026_3.csv');
+        const response = await fetch('DELIMA-PELAJAR-SEKOLAH_KEBANGSAAN_KAMPUNG_NANGKA-07092026.csv');
         const text = await response.text();
         const rows = text.split('\n');
 
