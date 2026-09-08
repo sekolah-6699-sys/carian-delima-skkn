@@ -14,13 +14,14 @@
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #333; }
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
+        input[type="text"]:focus { border-color: #1a73e8; outline: none; }
         button { width: 100%; padding: 12px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
         button:hover { background-color: #1557b0; }
         .result-box { margin-top: 20px; border: 1px solid #e0e0e0; border-radius: 8px; display: none; overflow: hidden; }
         .result-header { background: #e8f0fe; color: #1967d2; font-weight: bold; padding: 10px 15px; font-size: 15px; }
         .result-body { padding: 15px; font-size: 14px; line-height: 1.6; }
         .result-item { margin-bottom: 8px; }
-        .result-item strong { color: #5f6368; display: inline-block; width: 110px; }
+        .result-item strong { color: #5f6368; display: inline-block; width: 140px; }
         .delima-id { color: #1a73e8; font-weight: bold; word-break: break-all; }
         .error-msg { background: #fce8e6; color: #c5221f; padding: 12px; border-radius: 6px; margin-top: 15px; display: none; font-size: 14px; }
         .footer-note { margin-top: 15px; font-size: 12px; color: #70757a; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #1a73e8; }
@@ -46,6 +47,7 @@
         <div class="result-header">Maklumat Akaun Murid</div>
         <div class="result-body">
             <div class="result-item"><strong>Nama Murid:</strong> <span id="resNama"></span></div>
+            <div class="result-item"><strong>No. KP / MyKid:</strong> <span id="resKP"></span></div>
             <div class="result-item"><strong>Kelas:</strong> <span id="resKelas"></span></div>
             <div class="result-item"><strong>ID DELIMa:</strong> <span id="resID" class="delima-id"></span></div>
         </div>
@@ -53,7 +55,7 @@
 
     <div class="footer-note">
         <strong>Panduan Kata Laluan Laluan (Default):</strong><br>
-        Kata laluan murid ialah skkn1234
+        Kata laluan laluan murid secara standard ialah kombinasi Kod Sekolah dan 4 digit akhir Kad Pengenalan/MyKid.
     </div>
 </div>
 
@@ -85,6 +87,7 @@ async function prosesCarian() {
                 const icRekod = row[2].replace(/[^0-9]/g, '');
                 if (icRekod === icInput) {
                     document.getElementById('resNama').innerText = row[1].trim();
+                    document.getElementById('resKP').innerText = row[2].trim();
                     document.getElementById('resKelas').innerText = row[3].trim();
                     document.getElementById('resID').innerText = row[0].trim();
                     
