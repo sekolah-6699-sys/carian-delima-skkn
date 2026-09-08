@@ -8,6 +8,11 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f2f5; display: flex; justify-content: center; padding: 40px 15px; }
         .card { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        /* Gaya Logo Sekolah */
+        .logo-container { text-align: center; margin-bottom: 15px; }
+        .logo-container img { max-width: 100px; height: auto; }
+
         .header { text-align: center; margin-bottom: 20px; }
         .header h2 { color: #1a73e8; margin: 0 0 5px 0; font-size: 22px; }
         .header p { color: #5f6368; font-size: 14px; margin: 0; }
@@ -31,6 +36,11 @@
 <body>
 
 <div class="card">
+    <!-- Bahagian Logo Sekolah -->
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo SK Kampung Nangka">
+    </div>
+
     <div class="header">
         <h2>Semakan ID DELIMa Murid</h2>
         <p>SK Kampung Nangka</p>
@@ -92,7 +102,7 @@ async function prosesCarian() {
                     document.getElementById('resKP').innerText = row[2].trim();
                     document.getElementById('resKelas').innerText = row[3].trim();
                     document.getElementById('resID').innerText = row[0].trim();
-                    document.getElementById('resPass').innerText = row[5].trim(); // Lajur KE-6 (PASSWORD)
+                    document.getElementById('resPass').innerText = row[5].trim();
                     
                     resultBox.style.display = 'block';
                     dijumpai = true;
