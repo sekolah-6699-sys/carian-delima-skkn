@@ -9,36 +9,57 @@
         body { background-color: #f0f2f5; display: flex; justify-content: center; padding: 40px 15px; }
         .card { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         
-        /* Gaya Logo Sekolah */
         .logo-container { text-align: center; margin-bottom: 15px; }
         .logo-container img { max-width: 100px; height: auto; }
 
         .header { text-align: center; margin-bottom: 20px; }
         .header h2 { color: #1a73e8; margin: 0 0 5px 0; font-size: 22px; }
         .header p { color: #5f6368; font-size: 14px; margin: 0; }
+        
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #333; }
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
         input[type="text"]:focus { border-color: #1a73e8; outline: none; }
-        button { width: 100%; padding: 12px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        button:hover { background-color: #1557b0; }
+        
+        .btn-search { width: 100%; padding: 12px; background-color: #1a73e8; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-search:hover { background-color: #1557b0; }
+        
         .result-box { margin-top: 20px; border: 1px solid #e0e0e0; border-radius: 8px; display: none; overflow: hidden; }
         .result-header { background: #e8f0fe; color: #1967d2; font-weight: bold; padding: 10px 15px; font-size: 15px; }
         .result-body { padding: 15px; font-size: 14px; line-height: 1.6; }
-        .result-item { margin-bottom: 8px; }
-        .result-item strong { color: #5f6368; display: inline-block; width: 140px; }
+        
+        /* Gaya susunan baris dan butang copy */
+        .result-item { margin-bottom: 12px; display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+        .result-item div { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+        .result-item strong { color: #5f6368; min-width: 120px; }
+        
         .delima-id { color: #1a73e8; font-weight: bold; word-break: break-all; }
         .delima-pass { color: #d93025; font-weight: bold; font-family: monospace; font-size: 15px; }
+        
+        .btn-copy {
+            background-color: #f1f3f4;
+            color: #3c4043;
+            border: 1px solid #dadce0;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+        }
+        .btn-copy:hover { background-color: #e8eaed; }
+        .btn-copy.copied { background-color: #34a853; color: white; border-color: #34a853; }
+
         .error-msg { background: #fce8e6; color: #c5221f; padding: 12px; border-radius: 6px; margin-top: 15px; display: none; font-size: 14px; }
-        .footer-note { margin-top: 15px; font-size: 12px; color: #70757a; background: #fff8e1; padding: 10px; border-radius: 6px; border-left: 3px solid #fbc02d; }
+        .footer-note { margin-top: 20px; font-size: 13px; color: #444; background: #fff8e1; padding: 12px 15px; border-radius: 6px; border-left: 4px solid #fbc02d; line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <!-- Bahagian Logo Sekolah -->
     <div class="logo-container">
-        <img src="Logo SK Kampung Nangka" alt="Logo SK Kampung Nangka">
+        <img src="logo.png" alt="Logo SK Kampung Nangka" onerror="this.style.display='none'">
     </div>
 
     <div class="header">
@@ -50,18 +71,35 @@
         <label for="inputIC">Nombor Kad Pengenalan / MyKid:</label>
         <input type="text" id="inputIC" placeholder="Masukkan 12 digit No. KP" maxlength="12">
     </div>
-    <button onclick="prosesCarian()">Cari ID DELIMa</button>
+    <button class="btn-search" onclick="prosesCarian()">Cari ID DELIMa</button>
 
     <div id="errorBox" class="error-msg"></div>
 
     <div id="resultBox" class="result-box">
         <div class="result-header">Maklumat Akaun Murid</div>
         <div class="result-body">
-            <div class="result-item"><strong>Nama Murid:</strong> <span id="resNama"></span></div>
-            <div class="result-item"><strong>No. KP / MyKid:</strong> <span id="resKP"></span></div>
-            <div class="result-item"><strong>Kelas:</strong> <span id="resKelas"></span></div>
-            <div class="result-item"><strong>ID DELIMa:</strong> <span id="resID" class="delima-id"></span></div>
-            <div class="result-item"><strong>Kata Laluan:</strong> <span id="resPass" class="delima-pass"></span></div>
+            <div class="result-item">
+                <div><strong>Nama Murid:</strong> <span id="resNama"></span></div>
+            </div>
+            
+            <div class="result-item">
+                <div><strong>No. KP / MyKid:</strong> <span id="resKP"></span></div>
+                <button class="btn-copy" onclick="salinTeks('resKP', this)">Salin</button>
+            </div>
+            
+            <div class="result-item">
+                <div><strong>Kelas:</strong> <span id="resKelas"></span></div>
+            </div>
+            
+            <div class="result-item">
+                <div><strong>ID DELIMa:</strong> <span id="resID" class="delima-id"></span></div>
+                <button class="btn-copy" onclick="salinTeks('resID', this)">Salin</button>
+            </div>
+            
+            <div class="result-item">
+                <div><strong>Kata Laluan:</strong> <span id="resPass" class="delima-pass"></span></div>
+                <button class="btn-copy" onclick="salinTeks('resPass', this)">Salin</button>
+            </div>
         </div>
     </div>
 
@@ -104,6 +142,12 @@ async function prosesCarian() {
                     document.getElementById('resID').innerText = row[0].trim();
                     document.getElementById('resPass').innerText = row[5].trim();
                     
+                    // Reset semula butang salin jika pernah ditekan
+                    document.querySelectorAll('.btn-copy').forEach(btn => {
+                        btn.innerText = 'Salin';
+                        btn.classList.remove('copied');
+                    });
+
                     resultBox.style.display = 'block';
                     dijumpai = true;
                     break;
@@ -119,6 +163,19 @@ async function prosesCarian() {
         errorBox.innerText = 'Ralat memuatkan fail CSV. Pastikan fail berada dalam folder yang sama.';
         errorBox.style.display = 'block';
     }
+}
+
+function salinTeks(elementId, btnElement) {
+    const teks = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(teks).then(() => {
+        btnElement.innerText = 'Disalin!';
+        btnElement.classList.add('copied');
+        
+        setTimeout(() => {
+            btnElement.innerText = 'Salin';
+            btnElement.classList.remove('copied');
+        }, 2000);
+    });
 }
 </script>
 
