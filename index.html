@@ -23,8 +23,9 @@
         .result-item { margin-bottom: 8px; }
         .result-item strong { color: #5f6368; display: inline-block; width: 140px; }
         .delima-id { color: #1a73e8; font-weight: bold; word-break: break-all; }
+        .delima-pass { color: #d93025; font-weight: bold; font-family: monospace; font-size: 15px; }
         .error-msg { background: #fce8e6; color: #c5221f; padding: 12px; border-radius: 6px; margin-top: 15px; display: none; font-size: 14px; }
-        .footer-note { margin-top: 15px; font-size: 12px; color: #70757a; background: #f8f9fa; padding: 10px; border-radius: 6px; border-left: 3px solid #1a73e8; }
+        .footer-note { margin-top: 15px; font-size: 12px; color: #70757a; background: #fff8e1; padding: 10px; border-radius: 6px; border-left: 3px solid #fbc02d; }
     </style>
 </head>
 <body>
@@ -50,12 +51,13 @@
             <div class="result-item"><strong>No. KP / MyKid:</strong> <span id="resKP"></span></div>
             <div class="result-item"><strong>Kelas:</strong> <span id="resKelas"></span></div>
             <div class="result-item"><strong>ID DELIMa:</strong> <span id="resID" class="delima-id"></span></div>
+            <div class="result-item"><strong>Kata Laluan:</strong> <span id="resPass" class="delima-pass"></span></div>
         </div>
     </div>
 
     <div class="footer-note">
-        <strong>Panduan Kata Laluan Laluan (Default):</strong><br>
-        Kata laluan laluan murid secara standard ialah kombinasi Kod Sekolah dan 4 digit akhir Kad Pengenalan/MyKid.
+        <strong>Peringatan Keselamatan:</strong><br>
+        Sila tukar kata laluan anda selepas log masuk kali pertama demi menjaga keselamatan akaun DELIMa murid.
     </div>
 </div>
 
@@ -83,13 +85,14 @@ async function prosesCarian() {
 
         for (let i = 1; i < rows.length; i++) {
             const row = rows[i].split(',');
-            if (row.length >= 4) {
+            if (row.length >= 6) {
                 const icRekod = row[2].replace(/[^0-9]/g, '');
                 if (icRekod === icInput) {
                     document.getElementById('resNama').innerText = row[1].trim();
                     document.getElementById('resKP').innerText = row[2].trim();
                     document.getElementById('resKelas').innerText = row[3].trim();
                     document.getElementById('resID').innerText = row[0].trim();
+                    document.getElementById('resPass').innerText = row[5].trim(); // Lajur KE-6 (PASSWORD)
                     
                     resultBox.style.display = 'block';
                     dijumpai = true;
